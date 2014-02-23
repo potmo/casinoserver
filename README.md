@@ -7,6 +7,16 @@ The wager service is the main hub. It delegates implementation to the different 
 ##### Authentication Service
 The Authentication service is basically a proxy towards the partner integrations.
 
+> TODO: The Authentication service talks to the partner and will need to be able to propagate data from the partner to the client side partner integration.
+
+##### Configuration Service
+
+> TODO: There should be a configuration service
+
+##### Backoffice Service
+
+> TODO: There should be a configuration service. The backoffice servivce should probably be a lot of different services that can pull data out of different databases etc.
+
 ##### Game Service
 The Game service is actually on game service per game implementation. It must implement an API that is common for allthe games. That API is basically requiring that the game can say how much a wager request will cost and how much it will reward.
 The game service doesn't have a notion of money or currency. It is just given a seed and a game data.
@@ -19,23 +29,33 @@ The Game service can delegate to other subservices or implement persistance with
 ##### Campaign Service
 The Campaign services responsibility is to keep track of running campaign. It has the ability to give discounts and bonuses on wagers. A discount could be given when there is free games campaigns. A bonus can be given for example when the user spins her 1000:nd spin.
 
+> TODO: The campaign service should probably be a lot of different smaller services. One for each type of campaign.
+
 ##### Portfolio Service
-The Portfolio service keeps track of the partner and or users game portfolio. Some games can be activated only for a subset of users or partners.
+The Portfolio service keeps track of the partner and or users game portfolio. Some games can be activated only for a subset of users, partners or devices of thereof.
 
 ##### Analytics Service
 The Analytics service gather data both about the behaviour of different users and performance of the system.
 It can be implemented as a proxy for other 3:rd party products such as Google Analytics and New Relic.
 
+> TODO: Is it a good idea to use a graph database like neo4j for this instead of using a 3:rd party service?
+
 ##### Transaction Service
 The transaction service has two responsibilities (TODO: should it? Maybe that shold be a separate step). First communicate with the partner integration and create and close transactions. It also gets a random seed for the transaction from the Random Generator service.
-That random seed will be used to calculate the result by the Game service.
+That random seed will be used to calculate the result by the Game service
+
+> TODO: This must be able to propagate data from the partner to the front end partner integration.
 
 ##### Random Generator Service
 The Random Generator service only responisility is to provide evenly distributed random numbers.
 
+> TODO: Maybe the game should talk to the random number generator service directly. But we want as many services as possible to be idempotent and stateless. One way could be that we get a seed that the game then can use in the rest of the random calls. That seed needs to be really big I guess.
+
 ##### Replay Service
 The replay service stores replays of wagers. It does this basically by storing the full request and response by the client so that can be replayed later. It also keeps track of whitch wagers results that has been seen by the user.
-The Replay service privides an interface for the game client to list and get old wagers.
+The Replay service privides an interface for the game client to list and get old wagers
+
+> TODO: There should also be a way to report the progress of the replay. So when the game is running on the client it can store what boxes that was opened in a pick and click game and what freespins that has already been seen etc.
 
 
 ###Doing a Wager
