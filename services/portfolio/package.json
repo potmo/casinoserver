@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "0.0.0",
+  "description": "portfolio service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nisse Bergman",
+  "license": "COPYRIGHT",
+  "dependencies": {
+    "express": "~3.5.0",
+    "express-validator": "~2.1.0",
+    "util": "~0.10.3"
+  }
+}
