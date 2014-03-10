@@ -15,15 +15,15 @@ app.post('/can_play_game', function(req, res) {
 
 
 	// marshall request
-	req.checkBody('partner', 'invalid body field: partner').notEmpty().isAlphanumeric();
-	req.checkBody('game', 'invalid body field: game').notEmpty().isAlphanumeric();
-	req.checkBody('currency', 'invalid body field: currency').notEmpty().isAlpha().isLength(3,3);
-	req.checkBody('player', 'invalid body field: currency').notEmpty().isAlphanumeric();
+	req.checkBody('partner', 'malformed input').notEmpty().isAlphanumeric();
+	req.checkBody('game', 'malformed input').notEmpty().isAlphanumeric();
+	req.checkBody('currency', 'malformed input').notEmpty().isAlpha().isLength(3,3);
+	req.checkBody('player', 'malformed input').notEmpty().isAlphanumeric();
 
 	var errors = req.validationErrors();
 
 	if (errors) {
-		res.send('There have been validation errors: ' + util.inspect(errors), 400);
+		res.json({error: errors}, 400);
 		return;
 	}
 
@@ -32,4 +32,6 @@ app.post('/can_play_game', function(req, res) {
 	});
 });
 
-app.listen(8888);
+app.listen(process.env.PORT || 5000);
+
+module.exports = app;

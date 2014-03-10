@@ -4,7 +4,8 @@
   "description": "portfolio service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter list",
+    "start": "node ./src/index.js"
   },
   "author": "Nisse Bergman",
   "license": "COPYRIGHT",
@@ -12,5 +13,9 @@
     "express": "~3.5.0",
     "express-validator": "~2.1.0",
     "util": "~0.10.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "supertest": "~0.9.0"
   }
 }
